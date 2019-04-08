@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DataLibrary.Models;
+using static DataLibrary.BusinessLogic.Validator;
+using static DataLibrary.BusinessLogic.Verifier;
 
 namespace API.Controllers
 {
@@ -17,6 +19,16 @@ namespace API.Controllers
         }
 
         private int VerifyInput(string username, string password)
+        {
+            return VerifyUser(username, password);
+        }
+
+        private int ValidateInput(string username, string password)
+        {
+            return ValidateUser(username, password);
+        }
+
+        private string GenerateUserToken()
         {
 
         }

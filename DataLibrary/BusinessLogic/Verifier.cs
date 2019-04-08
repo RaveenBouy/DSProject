@@ -6,6 +6,6 @@ namespace DataLibrary.BusinessLogic
 {
     public class Verifier
     {
-
+        
     }
 }
