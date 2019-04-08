@@ -16,7 +16,7 @@ namespace DataLibrary.BusinessLogic
         {
             try
             {
-                return Regex.IsMatch(username, @"/^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/") ? true : false;
+                return Regex.IsMatch(username, @"^[a-zA-Z0-9-_%£$@\\/]*$") ? true : false; ///^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/
             }
             catch (Exception)
             {
