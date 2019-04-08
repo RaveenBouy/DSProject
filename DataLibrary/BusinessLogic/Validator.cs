@@ -7,9 +7,9 @@ namespace DataLibrary.BusinessLogic
 {
     public static class Validator
     {
-        public static int ValidateUser(string username, string password) // 0 = Validated 1 = invalid username 2 = invalid password
+        public static int ValidateUser(string username, string password) // 7 = Validated 2 = invalid username 3 = invalid password
         {
-            return ValidateUsername(username) ? ValidatePassword(password) ? 0 : 2 : 1;
+            return ValidateUsername(username) ? ValidatePassword(password) ? 7 : 3 : 2;
         }
 
         private static bool ValidateUsername(string username)
