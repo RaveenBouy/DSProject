@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace API
 {
@@ -41,10 +42,11 @@ namespace API
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
-                                   ForwardedHeaders.XForwardedProto
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -12,18 +12,23 @@ namespace DataLibrary.BusinessLogic
         {
             var userModel = new UserModel();
             bool isError = false;
+            bool isUserFound = false;
             var user = LoadUser(username);
 
-            try
+            if (user != null)
             {
-                userModel = user[0];
+                if (user.Count == 1)
+                {
+                    userModel = user[0];
+                    isUserFound = true;
+                }
             }
-            catch (Exception)
+            else
             {
                 isError = true;
             }
 
-            return ((!isError ? user.Count == 1 ? Hashing.ValidatePassword(password, userModel.Password) ? 6 : 3 : 2 : 4), userModel);
+            return ((!isError ? isUserFound ? Hashing.ValidatePassword(password, userModel.Pass) ? 6 : 3 : 2 : 4), userModel);
         }
 
         public static bool VerifyToken(string token)

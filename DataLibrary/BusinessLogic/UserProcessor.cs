@@ -10,7 +10,7 @@ namespace DataLibrary.BusinessLogic
     {
         public static List<UserModel> LoadUser(string username)
         {
-            var sql = $@"SELECT id, username, email, password FROM users WHERE username = '{username}'";
+            var sql = $@"SELECT Id, UserName, Email, Pass FROM user WHERE UserName = '{username}'";
             return SqlDataAccess.LoadData<UserModel>(sql);
         }
     }

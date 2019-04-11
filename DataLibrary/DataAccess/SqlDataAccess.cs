@@ -13,19 +13,20 @@ namespace DataLibrary.DataAccess
     {
         private static string GetConnectionString()
         {
-            return "constring";
+            return "Server=127.0.0.1; Port=3306; Database=dsproject; Uid=root";
         }
 
         public static List<T> LoadData<T>(string sql)
         {
+           
             try
             {
-                using (IDbConnection con = new MySqlConnection(GetConnectionString()))
+                using (IDbConnection con = new  MySqlConnection(GetConnectionString()))
                 {
                     return con.Query<T>(sql).ToList();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -40,7 +41,7 @@ namespace DataLibrary.DataAccess
                     return con.Execute(sql, data);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }

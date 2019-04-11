@@ -33,7 +33,7 @@ namespace DataLibrary.BusinessLogic
 
         public static bool VerifyToken(string token)
         {
-            var sql = $@"SELECT COUNT(token) FROM authenticationToken WHERE token='{token}'";
+            var sql = $@"SELECT COUNT(token) FROM authentication_token WHERE Token='{token}'";
             var value = SqlDataAccess.LoadData<int>(sql)[0];
             return value == 0 ? true : false;
         }
@@ -41,7 +41,7 @@ namespace DataLibrary.BusinessLogic
         public static int WriteAuthenticationToken(int userId, string token)
         {
             var date = DateTime.Now.AddHours(12);
-            const string sql = @"INSERT INTO authenticationToken(userId, token, expireDateTime) VALUES(@Token, @UserId, @Additional, @ExpireDateTime);";
+            const string sql = @"INSERT INTO authentication_token(UserId, Token, ExpireDateTime) VALUES(@UserId, @Token, @ExpireDateTime);";
 
             var data = new TokenModel
             {
