@@ -11,107 +11,41 @@ using static DataLibrary.BusinessLogic.Verifier;
 
 namespace API.Controllers
 {
-    [Route("api/login")]
     [ApiController]
     public class UserController : Controller
     {
-        private string Token { get; set; }
-        private bool IsVerified { get; set; }
-        private bool IsValidated { get; set; }
-        private new UserModel User { get; set; } = new UserModel();
-
-        public AuthResponseModel Get([FromQuery] string username, string password)
+        [HttpGet("api/login")]
+        public AuthResponseModel LoginUser([FromQuery] string username, string password)
         {
-            var validateResponse = SetResponse(ValidateInput(username, password));
-
-            if (IsValidated)
-            {
-                var (result, userModel) = VerifyUser(username, password);
-                var verifyResponse = SetResponse(result);
-                User = userModel;
-
-                if (IsVerified)
-                {
-                    return SetResponse(5);
-                }
-
-                 return verifyResponse;
-            }
-            else
-            {
-                return validateResponse;
-            }
+            UserLoginLogic login = new UserLoginLogic();
+            return login.Login(username, password);
         }
 
-        private (int, UserModel) VerifyUser(string username, string password)
+        [HttpGet("api/staff/users{token}")]
+        public IEnumerable<UserModel> GetAllUsers(string token)
         {
-            return VerifyeUser(username, password);
+            return UserProcessor.GetAllUsers(token);
         }
 
-        private int ValidateInput(string username, string password)
+        [HttpPost("api/register")]
+        public AuthResponseModel RegisterUser([FromBody] UserModel userModel)
         {
-            return ValidateUser(username, password);
+            UserRegisterLogic logic = new UserRegisterLogic();
+            return logic.UserRegister(userModel);
         }
 
-        private string GenerateUserToken()
+        [HttpPut("api/staff/updateuser")]
+        public AuthResponseModel UpdateUser([FromBody] DynamicUpdateModel updateModel)
         {
-            Token = TokenProcessor.GenerateToken();
-
-            while (!VerifyToken(Token))
-            {
-                Token = TokenProcessor.GenerateToken();
-            }
-
-            using (var bgWorker = new BackgroundWorker())
-            {
-                bgWorker.DoWork += BgWorkerOnDoWork;
-                bgWorker.RunWorkerAsync();
-                return Token;
-            }
+            UserUpdateLogic logic = new UserUpdateLogic();
+            return logic.UserUpdate(updateModel);
         }
 
-        private void BgWorkerOnDoWork(object sender, DoWorkEventArgs e)
+        [HttpDelete("api/staff/deleteuser{token}/{id}")]
+        public AuthResponseModel DeleteUser(string token, int id)
         {
-            TokenProcessor.WriteAuthenticationToken(User.Id, Token);
+            DeleteUserLogic deleteUser = new DeleteUserLogic();
+            return deleteUser.DeleteUser(token, id);
         }
-
-        private AuthResponseModel SetResponse(int decision)
-        {
-            var jsonResponse = new AuthResponseModel();
-
-            switch (decision)
-            {
-                case 1:
-                    jsonResponse.Response = 403;
-                    jsonResponse.Error = "Auth failed";
-                    break;
-                case 2:
-                    jsonResponse.Response = 403;
-                    jsonResponse.Error = "Invalid username";
-                    break;
-                case 3:
-                    jsonResponse.Response = 403;
-                    jsonResponse.Error = "Invalid password";
-                    break;
-                case 4:
-                    jsonResponse.Response = 500;
-                    jsonResponse.Error = "Internal server error";
-                    break;
-                case 5:
-                    jsonResponse.Response = 200;
-                    jsonResponse.Error = null;
-                    jsonResponse.Token = GenerateUserToken();
-                    break;
-                case 6:
-                    IsVerified = true;
-                    break;
-                case 7:
-                    IsValidated = true;
-                    break;
-            }
-
-            return jsonResponse;
-        }
-
     }
 }
