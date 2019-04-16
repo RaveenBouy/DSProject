@@ -13,7 +13,7 @@ namespace DataLibrary.DataAccess
     {
         private static string GetConnectionString()
         {
-            return "Server=127.0.0.1; Port=3306; Database=APIProject; Uid=root";
+            return "Server=localhost; Port=3306; Database=dsproject; Uid=root";
         }
 
         public static List<T> LoadData<T>(string sql)

@@ -16,18 +16,8 @@ namespace DataLibrary.BusinessLogic
 
         public static int RegisterUser(UserModel userModel)
         {
-            bool isVerified;
-            if (userModel.UserType == 1)
-            {
-                isVerified = true;
-            }
-            else
-            {
-                isVerified = false;
-            }
-
-            var sql = @"INSERT INTO user(UserName, Email, Pass, UserType, IsVerified) "+
-                      $"VALUES(@Username, @Email, @Pass, @UserType, {isVerified})";
+            var sql = @"INSERT INTO user(UserName, Email, Pass) "+
+                      $"VALUES(@Username, @Email, @Pass)";
 
             var model = new UserModel
             {
@@ -37,38 +27,8 @@ namespace DataLibrary.BusinessLogic
                 UserType = userModel.UserType
             };
 
-            SetUserRole(model.UserName);
+
             return SqlDataAccess.SaveData(sql, model);               
-        }
-
-        public static int SetUserRole(string userName)
-        {
-            var sql = @"INSERT INTO user_roles(UserName,role) "+
-                       "VALUES(@Username, @Role)";
-
-            var model = new UserRoleModel
-            {
-                UserName = userName,
-                Role = 1
-            };
-
-            return SqlDataAccess.SaveData(sql, model);
-        }
-
-        public static int UpdateUser(int id, string type, string value)
-        {
-            var sql = @"UPDATE user " +
-                      $"SET {type} = @Value " +
-                       "WHERE id = @Id";
-
-            var data = new DynamicUpdateModel
-            {
-                Id = id,
-                Type = type,
-                Value = value
-            };
-
-            return SqlDataAccess.SaveData(sql, data);
         }
 
         public static int DeleteUser(int id)
