@@ -44,10 +44,29 @@ namespace WebSite.Controllers
             return View();
         }
 
-        public IActionResult AdsPage()
+		[HttpGet]
+		[Route("AdsPage/viewAdverts/")]
+		[Route("AdsPage/viewAdverts/{searchCondition}")]
+		[Route("AdsPage/viewAdverts/{searchCondition}/{sortCondition}")]
+		[Route("AdsPage/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}")]
+		[Route("AdsPage/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}/{location}")]
+		public ViewResult AdsPage(string searchCondition = "&none&", string sortCondition = "Created", string sortDirection = "DESC", string location = "None")
         {
-            return View();
+			AdvertRepository advert = new AdvertRepository();
+			List<AdvertisementModel> model = advert.GetAllAdvertisements(searchCondition, sortCondition, sortDirection, location);
+			ViewData["Adverts"] = model;
+			return View();
         }
+
+		[Route("AdView/viewAdvert/{id}")]
+		public ViewResult AdView(int id)
+		{
+			AdvertRepository advert = new AdvertRepository();
+			AdvertisementModel model = advert.GetAdvertisement(id);
+			ViewData["Adverts"] = model;
+			return View();
+		}
+
 
 		public ViewResult AdTest()
 		{

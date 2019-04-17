@@ -83,50 +83,31 @@
 
 
 
-    <div class="container">
+<div class="container">
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="thumbnail  productCard">
-                    <img src="~/images/sampleProduct1.jpg" alt="Product">
-                    <div class="row" style="margin-top:10px">
-                        <div class="col-sm-7" style="padding-left:30px">
-                            <p><strong>Lenovo MacBook Pro</strong></p>
-                            <p class="price"><strong>Rs. 150,000</strong></p>
-                        </div>
-                        <div class="col-sm-5 text-center">
-                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="thumbnail productCard">
-                    <img src="~/images/sampleProduct2.jpg" alt="Product">
-                    <div class="row" style="margin-top:10px">
-                        <div class="col-sm-7" style="padding-left:30px">
-                            <p><strong>Google Pixel XL</strong></p>
-                            <p class="price"><strong>Rs. 285,900</strong></p>
-                        </div>
-                        <div class="col-sm-5 text-center">
-                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="thumbnail productCard">
-                    <img src="~/images/sampleProduct3.jpg" alt="Product">
-                    <div class="row" style="margin-top:10px">
-                        <div class="col-sm-7" style="padding-left:30px">
-                            <p><strong>Gucci Ladies Handbag</strong></p>
-                            <p class="price"><strong>Rs. 15,450</strong></p>
-                        </div>
-                        <div class="col-sm-5 text-center">
-                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="row">
+
+				@{List<WebSite.Models.AdvertisementModel> adverts = ViewData["Adverts"] as List<WebSite.Models.AdvertisementModel>;
+					foreach (WebSite.Models.AdvertisementModel ad in adverts)
+					{
+
+						<div class="col-sm-4">
+							<div class="thumbnail  productCard">
+								<img src="~/images/sampleProduct1.jpg" alt="Product">
+								<div class="row" style="margin-top:10px">
+									<div class="col-sm-7" style="padding-left:30px">
+										<p><strong>@ad.ItemName</strong></p>
+										<p class="price"><strong>@ad.Price</strong></p>
+									</div>
+									<div class="col-sm-5 text-center">
+										
+										<a href="/AdView/viewAdvert/@ad.ItemId" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				}
+
+			</div>
+</div>
