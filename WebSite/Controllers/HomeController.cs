@@ -53,6 +53,13 @@ namespace WebSite.Controllers
         {
             return View();
         }
+		public ViewResult AdTest()
+		{
+			AdvertRepository advert = new AdvertRepository();
+			List<AdvertisementModel> model = advert.GetAllAdvertisements();
+			ViewData["Adverts"] = model;
+			return View();
+		}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

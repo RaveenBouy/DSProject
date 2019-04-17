@@ -1,0 +1,16 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Details from cs </title>
+</head>
+<body>
+	
+		@{List<WebSite.Models.AdvertisementModel> adverts = ViewData["Adverts"] as List<WebSite.Models.AdvertisementModel>;
+			foreach (WebSite.Models.AdvertisementModel ad in adverts)
+			{
+			<h3> @ad.ItemName;  </h3>
+				}
+			}
+
+
+</body>
+</html>
