@@ -63,15 +63,15 @@
                         <li><a href="#portfolio">CREATE AD</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#myModal" data-toggle="modal">LOGIN</a></li>
-                        <li><a href="#contact">REGISTER</a></li>
+                        <li><a href="#LoginModal" data-toggle="modal">LOGIN</a></li>
+                        <li><a href="#RegisterModal" data-toggle="modal">REGISTER</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Modal HTML -->
-        <div id="myModal" class="modal fade" style="margin-top:50px">
+        <!-- Login Modal HTML -->
+        <div id="LoginModal" class="modal fade" style="margin-top:50px">
             <div class="modal-dialog modal-login">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -79,7 +79,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form action="/examples/actions/confirmation.php" method="post">
+                        <form action="#" method="post">
                             <div class="form-group">
                                 <i class="fa fa-user"></i>
                                 <input type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
@@ -101,6 +101,44 @@
             </div>
         </div>
 
+
+
+        <!-- Register Modal HTML -->
+        <div id="RegisterModal" class="modal fade" style="margin-top:50px">
+            <div class="modal-dialog modal-login">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Registration</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <i class="fa fa-user"></i>
+                                <input type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-user"></i>
+                                <input type="text" class="form-control" placeholder="Email" style="border-radius:24px" required="required">
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-lock"></i>
+                                <input type="password" class="form-control" id="regPassword" placeholder="Password" style="border-radius:24px" required="required">
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-lock"></i>
+                                <input type="password" class="form-control" id="regConfirmPassword" placeholder="Re-Enter Password" style="border-radius:24px" required="required">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block btn-lg" value="Register" style="border-radius:24px">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div>
@@ -112,5 +150,20 @@
             <p>2019 Copyrigths Reserved</p>
         </footer>
     </div>
+
+
+    <script>
+        var password = document.getElementById("regPassword"), confirm_password = document.getElementById("regConfirmPassword");
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+
 </body>
 </html>

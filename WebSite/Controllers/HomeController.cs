@@ -67,7 +67,10 @@ namespace WebSite.Controllers
 			return View();
 		}
 
-
+        public IActionResult PostAd()
+        {
+            return View();
+        }
 		public ViewResult AdTest()
 		{
 			AdvertRepository advert = new AdvertRepository();
