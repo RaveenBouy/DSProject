@@ -56,13 +56,13 @@
     }
 
     .modal-login .btn {
-        background-image: linear-gradient(to right, #320D7E, #25E7E1);
+        background:#320D7E;
         border: none;
         line-height: normal;
     }
 
     .modal-login .btn:hover, .modal-login .btn:focus {
-            background-image: linear-gradient(to right, #25E7E1, #320D7E);
+        background: #25E7E1;
     }
 
     .modal-login .modal-footer {
