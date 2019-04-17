@@ -1,18 +1,67 @@
-﻿<html>
-<head>
-    <title>Classified Ads</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-    
-    <div class="container-fluid">
+﻿
 
-        <div class="container-fluid" id="topImage">
-            <h1>hi friends</h1>
+    <style>
+        #banner {
+            background-image: linear-gradient(to right, #320D7E, #25E7E1);
+            color: #ffffff;
+            padding-top: 100px;
+        }
+
+        .featuresImg{
+            width:200px;
+            height:200px;
+        }
+
+        .feature_details{
+            margin-top:20px;
+        }
+    </style>
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Classified Ads";
+ }
+    <section id="banner">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 style="font-size: 55px">Post Yours Ads</h1>
+                    <p>For Successful Businesses & For You</p>
+                        <div class="row" style="margin-top: 50px">
+                            <form action="/action_page.php">
+                                <div class="form-group col-sm-6">
+                                    <input type="text" class="form-control" id="searchQuery" placeholder="Search Item" style="border-radius:24px; padding:22px">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="submit" class="btn btn-default btn-lg" style="background-color:#F8D210; border-radius:24px">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <img src="~/images/colloborate2.png" style="width:60%; height:50%" />
+                </div>
+            </div>
         </div>
+        <img src="~/images/layerimage.png" style="width: 100%;" class="bottom" />
 
+    </section>
+
+    <div class="container text-center" style="margin-bottom:50px">
+        <h1><b>Features We Offer</b></h1>
+        <div class="row" style="margin-top:50px">
+            <div class="col-sm-4">
+                <img src="~/images/feature3HomePage.png" class="featuresImg"/>
+                <h5 class="feature_details"><b>Create & Publish Ads</b></h5>
+            </div>
+            <div class="col-sm-4">
+                <img src="~/images/feature2HomePage.jpg" class="featuresImg"/>
+                <h5 class="feature_details"><b>Manage & Handle Buyers In A Single Location</b></h5>
+            </div>
+            <div class="col-sm-4">
+                <img src="~/images/feature1HomePage.jpg" class="featuresImg"/>
+                <h5 class="feature_details"><b>Promote Your Ads Within Our Network</b></h5>
+            </div>
+        </div>
     </div>
-</body>
-</html>

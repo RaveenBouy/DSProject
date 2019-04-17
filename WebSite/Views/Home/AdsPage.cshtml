@@ -1,0 +1,113 @@
+﻿<style>
+
+#banner {
+  background-image: linear-gradient(to right, #320D7E, #25E7E1);
+  color: #ffffff;
+  padding-top: 100px;
+}
+
+.thumbnail {
+  padding: 0 0 15px 0;
+  border: none;
+  border-radius: 0;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 240px;
+  margin-bottom: 10px;
+}
+
+.price{
+    font-size:16px;
+}
+
+.viewMoreBtn{
+    background-color:#F8D210; 
+    border-radius:24px; 
+    border-color: transparent;
+    color:#fff;
+}
+
+.productCard{
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+</style>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Classified Ads";
+}
+
+<section id="banner">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 style="font-size: 55px">Post Yours Ads</h1>
+                <p>For Successful Businesses & For You</p>
+
+                <div style="margin-top:75px; margin-bottom:50px">
+                    <a href="#" class="btn btn-default btn-lg" role="button" style="background-color:#F8D210; border-radius:24px">SEE AD POST</a>
+                    <a href="#" class="btn btn-default btn-lg" role="button" style="background-color:#F8D210; border-radius:24px">CREATE YOUR ADS</a>
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <img src="~/images/colloborate2.png" style="width:60%; height:50%" />
+            </div>
+        </div>
+    </div>
+    <img src="~/images/layerimage.png" style="width: 100%;" class="bottom" />
+
+</section>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="thumbnail  productCard">
+                    <img src="~/images/sampleProduct1.jpg" alt="Product">
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-7" style="padding-left:30px">
+                            <p><strong>Lenovo MacBook Pro</strong></p>
+                            <p class="price"><strong>Rs. 150,000</strong></p>
+                        </div>
+                        <div class="col-sm-5 text-center">
+                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail productCard">
+                    <img src="~/images/sampleProduct2.jpg" alt="Product">
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-7" style="padding-left:30px">
+                            <p><strong>Google Pixel XL</strong></p>
+                            <p class="price"><strong>Rs. 285,900</strong></p>
+                        </div>
+                        <div class="col-sm-5 text-center">
+                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail productCard">
+                    <img src="~/images/sampleProduct3.jpg" alt="Product">
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-sm-7" style="padding-left:30px">
+                            <p><strong>Gucci Ladies Handbag</strong></p>
+                            <p class="price"><strong>Rs. 15,450</strong></p>
+                        </div>
+                        <div class="col-sm-5 text-center">
+                            <a href="#" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
