@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace DataLibrary.BusinessLogic
 {
 	public class PostAdvertisementLogic
@@ -54,38 +55,7 @@ namespace DataLibrary.BusinessLogic
 		}
 
 
-		public IEnumerable<AdvertisementModel> viewAllPosts(String searchCondition, String sortCondition, String sortDirection, String location) {
-			IEnumerable<AdvertisementModel> result = AdvertisementProcessor.ViewAllPosts(searchCondition, sortCondition, sortDirection, location);
-			//var verifyResponse = SetResponse(result);
-
-			//if (IsVerified)
-			//{
-			//	return SetResponse(5);
-			//}
-			//else
-			//{
-			//	return verifyResponse;
-			//}
-			return result;
-		}
-
-
-		public List<AdvertisementModel> viewPostById(int id)
-		{
-			var result = AdvertisementProcessor.ViewPostById(id);
-			//var verifyResponse = SetResponse(result);
-
-			//if (IsVerified)
-			//{
-			//	return SetResponse(5);
-			//}
-			//else
-			//{
-			//	return verifyResponse;
-			//}
-			return result;
-		}
-
+		
 
 	}
 }

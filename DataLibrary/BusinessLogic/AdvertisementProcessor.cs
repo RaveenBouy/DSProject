@@ -54,8 +54,6 @@ namespace DataLibrary.BusinessLogic
 					$"ItemName LIKE '%{searchCondition}%' AND city= '{location}' ORDER BY {sortCondition} {sortDirection}");
 			}
 
-
-
 			return SqlDataAccess.LoadData<AdvertisementModel>(sql.ToString());
 		}
 		

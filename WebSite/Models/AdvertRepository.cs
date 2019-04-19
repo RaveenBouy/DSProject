@@ -8,29 +8,29 @@ using System.Threading.Tasks;
 
 namespace WebSite.Models
 {
-public class AdvertRepository
-{
-private List<AdvertisementModel> _advertList = new List<AdvertisementModel>();
-
-public AdvertRepository()
-{
-
-}
-
-	public AdvertisementModel GetAdvertisement(int id)
+	public class AdvertRepository
 	{
-		AdvertisementModel adModel = null;
-		try
+		private List<AdvertisementModel> _advertList = new List<AdvertisementModel>();
+
+		public AdvertRepository()
 		{
-			using (var streamReader = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create(
-			string.Concat(new string[]
+
+		}
+
+		public AdvertisementModel GetAdvertisement(int id)
+		{
+			AdvertisementModel adModel = null;
+			try
 			{
+				using (var streamReader = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create(
+				string.Concat(new string[]
+				{
 				$"https://localhost:44376/api/ad/viewPostById/{id}"
 
-			}))).GetResponse()).GetResponseStream()))
-			{
-				var json = JsonMapper.ToObject(streamReader.ReadToEnd());
-					
+				}))).GetResponse()).GetResponseStream()))
+				{
+					var json = JsonMapper.ToObject(streamReader.ReadToEnd());
+
 					adModel = new AdvertisementModel
 					{
 						ItemId = json[0]["itemId"].ToString(),
@@ -47,63 +47,63 @@ public AdvertRepository()
 						Updated = json[0]["updated"].ToString(),
 						ViewCount = json[0]["viewCount"].ToString()
 					};
-					
 
+
+				}
 			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+
+			return adModel;
 		}
-		catch (Exception)
+
+
+
+		public List<AdvertisementModel> GetAllAdvertisements(string searchCondition = "&none&", string sortCondition = "Created", string sortDirection = "DESC", string location = "None")
 		{
-
-			throw;
-		}
-
-		return adModel;
-	}
-
-
-
-	public List<AdvertisementModel> GetAllAdvertisements(string searchCondition = "&none&", string sortCondition = "Created", string sortDirection = "DESC", string location = "None")
-{
-	try
-	{
-		using (var streamReader = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create(
-		string.Concat(new string[]
-		{
+			try
+			{
+				using (var streamReader = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create(
+				string.Concat(new string[]
+				{
 			$"https://localhost:44376/api/ad/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}/{location}"
 
-		}))).GetResponse()).GetResponseStream()))
-		{
-			var json = JsonMapper.ToObject(streamReader.ReadToEnd());
-
-			for (int i = 0; i < json.Count; i++)
-			{
-				_advertList.Add(new AdvertisementModel
+				}))).GetResponse()).GetResponseStream()))
 				{
-					ItemId = json[i]["itemId"].ToString(),
-					ItemName = json[i]["itemName"].ToString(),
-					ItemDescription = json[i]["itemDescription"].ToString(),
-					ItemCount = json[i]["itemCount"].ToString(),
-					City = json[i]["city"].ToString(),
-					ItemCategory = json[i]["itemCategory"].ToString(),
-					Tele = json[i]["tele"].ToString(),
-					Price = json[i]["price"].ToString(),
-					Con = json[i]["con"].ToString(),
-					Negotiable = json[i]["negotiable"].ToString(),
-					Created = json[i]["created"].ToString(),
-					Updated = json[i]["updated"].ToString(),
-					ViewCount = json[i]["viewCount"].ToString()
-						
-				});
-			}
+					var json = JsonMapper.ToObject(streamReader.ReadToEnd());
 
+					for (int i = 0; i < json.Count; i++)
+					{
+						_advertList.Add(new AdvertisementModel
+						{
+							ItemId = json[i]["itemId"].ToString(),
+							ItemName = json[i]["itemName"].ToString(),
+							ItemDescription = json[i]["itemDescription"].ToString(),
+							ItemCount = json[i]["itemCount"].ToString(),
+							City = json[i]["city"].ToString(),
+							ItemCategory = json[i]["itemCategory"].ToString(),
+							Tele = json[i]["tele"].ToString(),
+							Price = json[i]["price"].ToString(),
+							Con = json[i]["con"].ToString(),
+							Negotiable = json[i]["negotiable"].ToString(),
+							Created = json[i]["created"].ToString(),
+							Updated = json[i]["updated"].ToString(),
+							ViewCount = json[i]["viewCount"].ToString()
+
+						});
+					}
+
+				}
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+			return _advertList;
 		}
 	}
-	catch (Exception)
-	{
-
-		throw;
-	}
-	return _advertList;
-}
-}
 }

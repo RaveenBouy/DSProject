@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DataLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.Models;
 
@@ -39,9 +40,13 @@ namespace WebSite.Controllers
             return View();
         }
 
-        public IActionResult Home()
+        public IActionResult Home(AuthResponseModel response)
         {
-            return View();
+			ViewData["Response"] = response.Response;
+			ViewData["Status"] = response.Status;
+			ViewData["Info"] = response.Info;
+
+			return View();
         }
 
 		[HttpGet]
@@ -55,8 +60,52 @@ namespace WebSite.Controllers
 			AdvertRepository advert = new AdvertRepository();
 			List<AdvertisementModel> model = advert.GetAllAdvertisements(searchCondition, sortCondition, sortDirection, location);
 			ViewData["Adverts"] = model;
+
 			return View();
         }
+
+		[HttpPost]
+		[Route("user/register")]
+		public async Task<ActionResult> RegisterAsync(string username, string email, string password)
+		{
+			UserRepository user = new UserRepository();
+			AuthResponseModel response = new AuthResponseModel();
+			response = await user.UserRegisterAsync(username, email, password);
+
+			if (response.Response.Equals(200)) {
+				return RedirectToAction("AdsPage");
+			}
+			else
+			{
+				var rsp = new AuthResponseModel { Response = response.Response, Status = response.Status, Info = response.Info };
+				return RedirectToAction("Home", "Home", rsp);
+			}
+
+		}
+
+		[HttpGet]
+		[Route("user/login")]
+		public ActionResult Login(string username, string password)
+		{
+			UserRepository user = new UserRepository();
+			AuthResponseModel response = user.UserLogin(username, password);
+
+
+			if (response.Response.Equals(200))
+			{
+				//1st line doesnt work
+				return RedirectToAction("AdsPage");
+			}
+			else
+			{
+				//1st line doesnt work
+				var rsp = new AuthResponseModel { Response = response.Response, Status = response.Status, Info = response.Info };
+				return RedirectToAction("Home", "Home", rsp);
+			}
+
+		}
+
+
 
 		[Route("AdView/viewAdvert/{id}")]
 		public ViewResult AdView(int id)
@@ -71,6 +120,7 @@ namespace WebSite.Controllers
         {
             return View();
         }
+
 		public ViewResult AdTest()
 		{
 			AdvertRepository advert = new AdvertRepository();

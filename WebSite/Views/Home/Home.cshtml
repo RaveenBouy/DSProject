@@ -1,67 +1,94 @@
 ﻿
 
-    <style>
-        #banner {
-            background-image: linear-gradient(to right, #320D7E, #25E7E1);
-            color: #ffffff;
-            padding-top: 100px;
-        }
+<style>
+	#banner {
+		background-image: linear-gradient(to right, #320D7E, #25E7E1);
+		color: #ffffff;
+		padding-top: 100px;
+	}
 
-        .featuresImg{
-            width:200px;
-            height:200px;
-        }
+	.featuresImg {
+		width: 200px;
+		height: 200px;
+	}
 
-        .feature_details{
-            margin-top:20px;
-        }
-    </style>
+	.feature_details {
+		margin-top: 20px;
+	}
+</style>
 
-@{ 
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Classified Ads";
- }
-    <section id="banner">
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Classified Ads";
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1 style="font-size: 55px">Post Yours Ads</h1>
-                    <p>For Successful Businesses & For You</p>
-                        <div class="row" style="margin-top: 50px">
-                            <form action="#">
-                                <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control" id="searchQuery" placeholder="Search Item" style="border-radius:24px; padding:22px">
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="submit" class="btn btn-default btn-lg" style="background-color:#F8D210; border-radius:24px; border-color: transparent">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                </div>
-                <div class="col-sm-6 text-center">
-                    <img src="~/images/colloborate2.png" style="width:60%; height:50%" />
-                </div>
-            </div>
-        </div>
-        <img src="~/images/layerimage.png" style="width: 100%;" class="bottom" />
 
-    </section>
+}
 
-    <div class="container text-center" style="margin-bottom:50px">
-        <h1><b>Features We Offer</b></h1>
-        <div class="row" style="margin-top:50px">
-            <div class="col-sm-4">
-                <img src="~/images/feature3HomePage.png" class="featuresImg"/>
-                <h5 class="feature_details"><b>Create & Publish Ads</b></h5>
-            </div>
-            <div class="col-sm-4">
-                <img src="~/images/feature2HomePage.jpg" class="featuresImg"/>
-                <h5 class="feature_details"><b>Manage & Handle Buyers In A Single Location</b></h5>
-            </div>
-            <div class="col-sm-4">
-                <img src="~/images/feature1HomePage.jpg" class="featuresImg"/>
-                <h5 class="feature_details"><b>Promote Your Ads Within Our Network</b></h5>
-            </div>
-        </div>
-    </div>
+<section id="banner">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				@{
+					string msg = "";
+					if (ViewData["Status"] != null)
+					{
+
+						msg = (string)ViewData["Status"];
+
+						<div class="alert alert-danger" role="alert">
+							<h1 style="font-size: 55px">@ViewData["Status"].ToString();</h1>
+						</div>
+
+
+						if (msg.Equals("-123"))
+						{
+							<div class="alert alert-danger" role="alert">
+								@ViewData["Message"].ToString();
+							</div>
+						}
+					}
+					else
+					{
+						<p>@msg</p>
+					}
+				}
+				<h1 style="font-size: 55px">Post Yours Ads</h1>
+				<p>For Successful Businesses & For You</p>
+				<div class="row" style="margin-top: 50px">
+					<form action="#">
+						<div class="form-group col-sm-6">
+							<input type="text" class="form-control" id="searchQuery" placeholder="Search Item" style="border-radius:24px; padding:22px">
+						</div>
+						<div class="col-sm-2">
+							<button type="submit" class="btn btn-default btn-lg" style="background-color:#F8D210; border-radius:24px; border-color: transparent">Search</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6 text-center">
+				<img src="~/images/colloborate2.png" style="width:60%; height:50%" />
+			</div>
+		</div>
+	</div>
+	<img src="~/images/layerimage.png" style="width: 100%;" class="bottom" />
+
+</section>
+
+<div class="container text-center" style="margin-bottom:50px">
+	<h1><b>Features We Offer</b></h1>
+	<div class="row" style="margin-top:50px">
+		<div class="col-sm-4">
+			<img src="~/images/feature3HomePage.png" class="featuresImg" />
+			<h5 class="feature_details"><b>Create & Publish Ads</b></h5>
+		</div>
+		<div class="col-sm-4">
+			<img src="~/images/feature2HomePage.jpg" class="featuresImg" />
+			<h5 class="feature_details"><b>Manage & Handle Buyers In A Single Location</b></h5>
+		</div>
+		<div class="col-sm-4">
+			<img src="~/images/feature1HomePage.jpg" class="featuresImg" />
+			<h5 class="feature_details"><b>Promote Your Ads Within Our Network</b></h5>
+		</div>
+	</div>
+</div>
