@@ -13,7 +13,6 @@ namespace DataLibrary.BusinessLogic
 			var userModel = new UserModel();
 			bool isError = false;
 			bool isUserFound = false;
-			bool isVerified = false;
 			var user = LoadUser(username);
 
 			if (user != null)
@@ -22,11 +21,6 @@ namespace DataLibrary.BusinessLogic
 				{
 					userModel = user[0];
 					isUserFound = true;
-
-					if (userModel.IsVerified)
-					{
-						isVerified = true;
-					}
 				}
 			}
 			else
@@ -34,7 +28,7 @@ namespace DataLibrary.BusinessLogic
 				isError = true;
 			}
 
-			return ((!isError ? isUserFound ? Hashing.ValidatePassword(password, userModel.Pass) ? isVerified ? 6 : 0 : 3 : 2 : 4), userModel);
+			return ((!isError ? isUserFound ? Hashing.ValidatePassword(password, userModel.Pass) ? 6 : 3 : 2 : 4), userModel);
 		}
 
 		public static bool VerifyToken(string token)
