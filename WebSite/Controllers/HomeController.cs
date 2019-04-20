@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 using DataLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebSite.Models;
+using Microsoft.AspNetCore.Session;
+using Microsoft.AspNetCore.Http;
 
 namespace WebSite.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+
+		const string SessionName = "_Username";
+		const string SessionAge = "_Age";
+
+
+		public IActionResult Index()
         {
             return View();
         }
@@ -61,6 +68,9 @@ namespace WebSite.Controllers
 			List<AdvertisementModel> model = advert.GetAllAdvertisements(searchCondition, sortCondition, sortDirection, location);
 			ViewData["Adverts"] = model;
 
+			//ViewBag.Name = HttpContext.Session.GetString(SessionName);
+			//ViewBag.Age = HttpContext.Session.GetInt32(SessionAge);
+
 			return View();
         }
 
@@ -94,8 +104,8 @@ namespace WebSite.Controllers
 			if (response.Response.Equals(200))
 			{
 				//1st line doesnt work
-
-
+				HttpContext.Session.SetString(SessionName, username);
+				HttpContext.Session.SetInt32(SessionAge, 24);
 				return RedirectToAction("AdsPage");
 			}
 			else

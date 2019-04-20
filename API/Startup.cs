@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Session;
 
 namespace API
 {
@@ -22,7 +24,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddDistributedMemoryCache();
+
+			services.AddSession();
+
+
+
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -59,7 +67,8 @@ namespace API
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-            app.UseSwagger();
+			app.UseSession();
+			app.UseSwagger();
             app.UseMvc();
         }
     }
