@@ -94,6 +94,8 @@ namespace WebSite.Controllers
 			if (response.Response.Equals(200))
 			{
 				//1st line doesnt work
+
+
 				return RedirectToAction("AdsPage");
 			}
 			else

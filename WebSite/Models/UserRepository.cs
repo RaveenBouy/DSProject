@@ -72,9 +72,8 @@ namespace WebSite.Models
 					authModel = new AuthResponseModel
 					{
 						Response = (int)json["response"],
-						Info = json["info"].ToString(),
 						Status = json["status"].ToString(),
-						Token = json[0]["itemName"].ToString()
+						Token = json["token"].ToString()
 					};
 
 
