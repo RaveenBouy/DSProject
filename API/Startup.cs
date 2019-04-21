@@ -24,12 +24,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			services.AddDistributedMemoryCache();
-
-			services.AddSession();
-
-
-
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -67,7 +61,6 @@ namespace API
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-			app.UseSession();
 			app.UseSwagger();
             app.UseMvc();
         }

@@ -2,168 +2,179 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="~/css/LoginModelCSS.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="~/css/LoginModelCSS.css" />
 
-    <style>
-        .navbar {
-            margin-bottom: 0;
-            background-image: linear-gradient(to right, #320D7E, #25E7E1);
-            z-index: 9999;
-            border: 0;
-            font-size: 12px !important;
-            line-height: 1.42857143 !important;
-            letter-spacing: 4px;
-            border-radius: 0;
-        }
+	<style>
+		.navbar {
+			margin-bottom: 0;
+			background-image: linear-gradient(to right, #320D7E, #25E7E1);
+			z-index: 9999;
+			border: 0;
+			font-size: 12px !important;
+			line-height: 1.42857143 !important;
+			letter-spacing: 4px;
+			border-radius: 0;
+		}
 
-        .navbar li a, .navbar .navbar-brand {
-                color: #fff !important;
-        }
+			.navbar li a, .navbar .navbar-brand {
+				color: #fff !important;
+			}
 
-        .navbar-nav li a:hover, .navbar-nav li.active a {
-            color: #fff !important;
-            background-color: #0288d1 !important;
-        }
+		.navbar-nav li a:hover, .navbar-nav li.active a {
+			color: #fff !important;
+			background-color: #0288d1 !important;
+		}
 
-        .navbar-default .navbar-toggle {
-            border-color: transparent;
-            color: #fff !important;
-        }
+		.navbar-default .navbar-toggle {
+			border-color: transparent;
+			color: #fff !important;
+		}
 
-        footer {
-        background-image: linear-gradient(to right, #320D7E, #25E7E1);
-        padding:10px;
-        }
-    </style>
+		footer {
+			background-image: linear-gradient(to right, #320D7E, #25E7E1);
+			padding: 10px;
+		}
+	</style>
 
 </head>
 <body>
-    <div>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Classified Ads</a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-left">
-                        <li><a href="#about">HOME</a></li>
-                        <li><a href="#services">SEE ADS</a></li>
-                        <li><a href="#portfolio">CREATE AD</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#LoginModal" data-toggle="modal">LOGIN</a></li>
-                        <li><a href="#RegisterModal" data-toggle="modal">REGISTER</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+	<div>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Classified Ads</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="#about">HOME</a></li>
+						<li><a href="#services">SEE ADS</a></li>
+						<li><a href="#portfolio">CREATE AD</a></li>
+					</ul>
 
-        <!-- Login Modal HTML -->
-        <div id="LoginModal" class="modal fade" style="margin-top:50px">
-            <div class="modal-dialog modal-login">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">User Login</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/user/login/" method="get">
-                            <div class="form-group">
-                                <i class="fa fa-user"></i>
-                                <input name="username" id="username" type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <i class="fa fa-lock"></i>
-                                <input name="password" id="password" type="password" class="form-control" placeholder="Password" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login" style="border-radius:24px">
-                            </div>
-                        </form>
+					@{ if (ViewBag.Name == null)
+						{
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#LoginModal" data-toggle="modal">LOGIN</a></li>
+								<li><a href="#RegisterModal" data-toggle="modal">REGISTER</a></li>
+							</ul>
+						}
+						else
+						{
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="/user/logout">@ViewBag.Name (Logout)</a></li>
+							</ul>
+						}
+					}
+				</div>
+			</div>
+		</nav>
 
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#">Forgot Password?</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<!-- Login Modal HTML -->
+		<div id="LoginModal" class="modal fade" style="margin-top:50px">
+			<div class="modal-dialog modal-login">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">User Login</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form action="/user/login/" method="get">
+							<div class="form-group">
+								<i class="fa fa-user"></i>
+								<input name="username" id="username" type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<i class="fa fa-lock"></i>
+								<input name="password" id="password" type="password" class="form-control" placeholder="Password" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<input type="submit" class="btn btn-primary btn-block btn-lg" value="Login" style="border-radius:24px">
+							</div>
+						</form>
 
-
-
-        <!-- Register Modal HTML -->
-        <div id="RegisterModal" class="modal fade" style="margin-top:50px">
-            <div class="modal-dialog modal-login">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Registration</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/user/register/" method="post">
-                            <div class="form-group">
-                                <i class="fa fa-user"></i>
-                                <input id="username" name="username" type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <i class="fa fa-user"></i>
-                                <input id="email" name="email" type="text" class="form-control" placeholder="Email" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <i class="fa fa-lock"></i>
-                                <input id="password" name="password" type="password" class="form-control" id="regPassword" placeholder="Password" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <i class="fa fa-lock"></i>
-                                <input type="password" class="form-control" id="regConfirmPassword" placeholder="Re-Enter Password" style="border-radius:24px" required="required">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-block btn-lg" value="Register" style="border-radius:24px">
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div>
-        @RenderBody()
-    </div>
-
-    <div>
-        <footer class="container-fluid text-center">
-            <p>2019 Copyrigths Reserved</p>
-        </footer>
-    </div>
+					</div>
+					<div class="modal-footer">
+						<a href="#">Forgot Password?</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-    <script>
-        var password = document.getElementById("regPassword"), confirm_password = document.getElementById("regConfirmPassword");
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Passwords Don't Match");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-    </script>
+
+		<!-- Register Modal HTML -->
+		<div id="RegisterModal" class="modal fade" style="margin-top:50px">
+			<div class="modal-dialog modal-login">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Registration</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form action="/user/register/" method="post">
+							<div class="form-group">
+								<i class="fa fa-user"></i>
+								<input id="username" name="username" type="text" class="form-control" placeholder="Username" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<i class="fa fa-user"></i>
+								<input id="email" name="email" type="text" class="form-control" placeholder="Email" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<i class="fa fa-lock"></i>
+								<input id="password" name="password" type="password" class="form-control" id="regPassword" placeholder="Password" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<i class="fa fa-lock"></i>
+								<input type="password" class="form-control" id="regConfirmPassword" placeholder="Re-Enter Password" style="border-radius:24px" required="required">
+							</div>
+							<div class="form-group">
+								<input type="submit" class="btn btn-primary btn-block btn-lg" value="Register" style="border-radius:24px">
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div>
+		@RenderBody()
+	</div>
+
+	<div>
+		<footer class="container-fluid text-center">
+			<p>2019 Copyrigths Reserved</p>
+		</footer>
+	</div>
+
+
+	<script>
+		var password = document.getElementById("regPassword"), confirm_password = document.getElementById("regConfirmPassword");
+		function validatePassword() {
+			if (password.value != confirm_password.value) {
+				confirm_password.setCustomValidity("Passwords Don't Match");
+			} else {
+				confirm_password.setCustomValidity('');
+			}
+		}
+		password.onchange = validatePassword;
+		confirm_password.onkeyup = validatePassword;
+	</script>
 
 </body>
 </html>

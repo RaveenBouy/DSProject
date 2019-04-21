@@ -15,7 +15,6 @@ namespace WebSite.Controllers
     {
 
 		const string SessionName = "_Username";
-		const string SessionAge = "_Age";
 
 
 		public IActionResult Index()
@@ -53,6 +52,9 @@ namespace WebSite.Controllers
 			ViewData["Status"] = response.Status;
 			ViewData["Info"] = response.Info;
 
+			ViewBag.Name = HttpContext.Session.GetString(SessionName);
+
+
 			return View();
         }
 
@@ -68,8 +70,8 @@ namespace WebSite.Controllers
 			List<AdvertisementModel> model = advert.GetAllAdvertisements(searchCondition, sortCondition, sortDirection, location);
 			ViewData["Adverts"] = model;
 
-			//ViewBag.Name = HttpContext.Session.GetString(SessionName);
-			//ViewBag.Age = HttpContext.Session.GetInt32(SessionAge);
+			ViewBag.Name = HttpContext.Session.GetString(SessionName);
+		//	ViewBag.Age = HttpContext.Session.GetInt32(SessionAge);
 
 			return View();
         }
@@ -105,7 +107,6 @@ namespace WebSite.Controllers
 			{
 				//1st line doesnt work
 				HttpContext.Session.SetString(SessionName, username);
-				HttpContext.Session.SetInt32(SessionAge, 24);
 				return RedirectToAction("AdsPage");
 			}
 			else
@@ -117,6 +118,14 @@ namespace WebSite.Controllers
 
 		}
 
+
+		[HttpGet]
+		[Route("user/logout")]
+		public async Task<IActionResult> Logout()
+		{
+			HttpContext.Session.Remove(SessionName);
+			return RedirectToAction("Home", "Home");
+		}
 
 
 		[Route("AdView/viewAdvert/{id}")]
