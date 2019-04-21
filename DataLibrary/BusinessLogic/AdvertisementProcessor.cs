@@ -35,20 +35,20 @@ namespace DataLibrary.BusinessLogic
 
 			sql.Append("SELECT * FROM advertisement");
 
-			if (searchCondition.Equals("&none&") && location.Equals("None")) {
+			if (searchCondition.Equals("&none&") && location.Equals("none")) {
 				sql.Append(" "+
 					$"ORDER BY {sortCondition} {sortDirection}");
 			}
-			else if(searchCondition.Equals("&none&") && !location.Equals("None")) {
+			else if(searchCondition.Equals("&none&") && !location.Equals("none")) {
 				sql.Append(" WHERE " +
 					$"City='{location}' ORDER BY {sortCondition} {sortDirection}");
 			}
-			else if (!searchCondition.Equals("&none&") && location.Equals("None"))
+			else if (!searchCondition.Equals("&none&") && location.Equals("none"))
 			{
 				sql.Append(" WHERE " +
 					$"ItemName LIKE '%{searchCondition}%' ORDER BY {sortCondition} {sortDirection}");
 			}
-			else if (!searchCondition.Equals("&none&") && !location.Equals("None"))
+			else if (!searchCondition.Equals("&none&") && !location.Equals("none"))
 			{
 				sql.Append(" WHERE " +
 					$"ItemName LIKE '%{searchCondition}%' AND city= '{location}' ORDER BY {sortCondition} {sortDirection}");

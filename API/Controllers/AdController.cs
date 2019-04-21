@@ -24,7 +24,7 @@ namespace API.Controllers
 		[Route("api/ad/viewAdverts/{searchCondition}/{sortCondition}")]
 		[Route("api/ad/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}")]
 		[Route("api/ad/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}/{location}")]
-		public IEnumerable<AdvertisementModel> ViewPosts(string searchCondition = "&none&", string sortCondition = "Created", string sortDirection = "DESC", string location = "None")
+		public IEnumerable<AdvertisementModel> ViewPosts(string searchCondition = "&none&", string sortCondition = "created", string sortDirection = "desc", string location = "none")
 		{
 			return AdvertisementProcessor.ViewAllPosts(searchCondition ,sortCondition, sortDirection, location);
 		}

@@ -62,7 +62,7 @@ namespace WebSite.Models
 
 
 
-		public List<AdvertisementModel> GetAllAdvertisements(string searchCondition = "&none&", string sortCondition = "Created", string sortDirection = "DESC", string location = "None")
+		public List<AdvertisementModel> GetAllAdvertisements(string searchCondition = "&none&", string sortCondition = "created", string sortDirection = "desc", string location = "none")
 		{
 			try
 			{
