@@ -46,8 +46,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1 style="font-size: 55px">Post Yours Ads</h1>
-                <div class="row" style="margin-top: 50px">
-                    <form action="#">
+                <form action="#">
+                    <div class="row" style="margin-top: 50px">
                         <div class="form-group col-sm-8">
                             <input type="text" class="form-control" id="searchQuery" placeholder="Search Item" style="border-radius:24px; padding:22px">
                         </div>
@@ -68,8 +68,22 @@
                         <div class="col-sm-2">
                             <button type="submit" class="btn btn-default" style="background-color:#F8D210; border-radius:24px; border-color: transparent">Search</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div>
+                        <div>
+                            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#filters" style="background-color:#F8D210; border-radius:24px; margin-top:10px; border-color: transparent">Filters</button>
+                        </div>
+                        <div class="collapse col-sm-10 row" id="filters" style="margin-top: 5px">
+                            <div class="radio col-sm-7">
+                                <label class="radio-inline"><input type="radio" name="optradio" checked>Descending</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">Ascending</label>
+                            </div>  
+                            <div class="checkbox col-sm-4">
+                                <label><input type="checkbox" value="">Most Viewed</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-sm-6 text-center">
                 <img src="~/images/colloborate2.png" style="width:60%; height:50%" />
@@ -83,30 +97,35 @@
 
 
 <div class="container">
+    <div class="row">
+        @{
+            int counter = 0;
+            List<WebSite.Models.AdvertisementModel> adverts = ViewData["Adverts"] as List<WebSite.Models.AdvertisementModel>;
+            foreach (WebSite.Models.AdvertisementModel ad in adverts)
+            {
+                <div class="col-sm-4">
+                    <div class="thumbnail  productCard">
+                        <img src="~/images/sampleProduct1.jpg" alt="Product">
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-sm-7" style="padding-left:30px">
+                                <p><strong>@ad.ItemName</strong></p>
+                                <p class="price"><strong>@ad.Price</strong></p>
+                            </div>
+                            <div class="col-sm-5 text-center">
+                                <a href="/AdView/viewAdvert/@ad.ItemId" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-			<div class="row">
-
-				@{List<WebSite.Models.AdvertisementModel> adverts = ViewData["Adverts"] as List<WebSite.Models.AdvertisementModel>;
-					foreach (WebSite.Models.AdvertisementModel ad in adverts)
-					{
-
-						<div class="col-sm-4">
-							<div class="thumbnail  productCard">
-								<img src="~/images/sampleProduct1.jpg" alt="Product">
-								<div class="row" style="margin-top:10px">
-									<div class="col-sm-7" style="padding-left:30px">
-										<p><strong>@ad.ItemName</strong></p>
-										<p class="price"><strong>@ad.Price</strong></p>
-									</div>
-									<div class="col-sm-5 text-center">
-										
-										<a href="/AdView/viewAdvert/@ad.ItemId" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					}
-				}
-
-			</div>
+                counter = counter + 1;
+                if (counter % 3 == 0)
+                {
+                    @:</div>
+                    @:<div class="row">
+                }
+            }
+        }
+    
+    </div>
 </div>
