@@ -58,9 +58,9 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="#about">HOME</a></li>
+						<li><a href="/home/home/">HOME</a></li>
 						<li><a href="/AdsPage/viewAdverts/&none&/created/desc/none">SEE ADS</a></li>
-						<li><a href="#portfolio">CREATE AD</a></li>
+						<li><a href="/AdsPage/postad/">CREATE AD</a></li>
 					</ul>
 
 					@{ if (ViewBag.Name == null)
@@ -73,7 +73,7 @@
 						else
 						{
 							<ul class="nav navbar-nav navbar-right">
-								<li><a href="/adsPage/viewadverts/">@ViewBag.Name (Logout)</a></li>
+								<li><a href="/user/logout">@ViewBag.Name (Logout)</a></li>
 							</ul>
 						}
 					}

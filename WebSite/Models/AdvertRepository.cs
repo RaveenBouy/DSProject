@@ -1,9 +1,11 @@
-﻿using LitJson;
+﻿using DataLibrary.Models;
+using LitJson;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace WebSite.Models
@@ -16,6 +18,43 @@ namespace WebSite.Models
 		{
 
 		}
+
+
+		public async Task<AuthResponseModel> AddAdvert(string iName, string iCategory, string iAvailable, string iLoc, string iDescription, string iContact, string iPrice, string iCondition, int iNegotiable)
+		{
+
+			string myJason = "{'ItemName': '" + iName + "', 'ItemDescription': '" + iDescription + "', 'ItemCategory': '" + iCategory+ "', 'ItemCount': '" + iAvailable + "', 'City': '" + iLoc + "', 'Tele': '" + iContact + "', 'Price': '" + iPrice + "', 'Con': '" + iCondition + "', 'Negotiable': " + iNegotiable+ "}";
+
+			JsonData json = new JsonData();
+			var response = new AuthResponseModel();
+
+			using (var client = new HttpClient())
+			{
+				var post = await client.PostAsync(
+					"https://localhost:44376/api/ad/advertisement",
+					new StringContent(myJason, System.Text.Encoding.UTF8, "application/json"));
+				json = await post.Content.ReadAsStringAsync();
+				json.ToString();
+			}
+
+			try
+			{
+				json = JsonMapper.ToObject(json.ToString());
+				response.Response = (int)json["response"];
+				response.Status = json["status"].ToString();
+				response.Info = json["info"].ToString();
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.GetBaseException().ToString());
+			}
+
+			return response;
+		}
+
+
+
+
 
 		public AdvertisementModel GetAdvertisement(int id)
 		{

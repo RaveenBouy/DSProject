@@ -17,7 +17,7 @@ namespace DataLibrary.Models
         public int? Price { get; set; }
         //public blob Image { get; set; }
         public string Con{ get; set; }
-		public string Negotiable { get; set; }
+		public int Negotiable { get; set; }
 		public string Created { get; set; }
 		public string Updated { get; set; }
 		public int? ViewCount { get; set; }

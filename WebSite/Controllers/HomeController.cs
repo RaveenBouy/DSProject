@@ -58,6 +58,8 @@ namespace WebSite.Controllers
 			return View();
         }
 
+
+
 		[HttpGet]
 		[Route("AdsPage/viewAdverts/")]
 		[Route("AdsPage/viewAdverts/{searchCondition}")]
@@ -76,6 +78,24 @@ namespace WebSite.Controllers
 			return View();
         }
 
+
+		[Route("AdView/viewAdvert/{id}")]
+		public ViewResult AdView(int id)
+		{
+			AdvertRepository advert = new AdvertRepository();
+			AdvertisementModel model = advert.GetAdvertisement(id);
+			ViewData["Adverts"] = model;
+			return View();
+		}
+
+
+		[Route("AdsPage/postad/")]
+		public IActionResult PostAd()
+		{
+			return View();
+		}
+
+
 		[HttpPost]
 		[Route("user/register")]
 		public async Task<ActionResult> RegisterAsync(string username, string email, string password)
@@ -84,7 +104,8 @@ namespace WebSite.Controllers
 			AuthResponseModel response = new AuthResponseModel();
 			response = await user.UserRegisterAsync(username, email, password);
 
-			if (response.Response.Equals(200)) {
+			if (response.Response.Equals(200))
+			{
 				return RedirectToAction("AdsPage");
 			}
 			else
@@ -94,6 +115,39 @@ namespace WebSite.Controllers
 			}
 
 		}
+
+
+		[HttpPost]
+		[Route("ad/postAd/")]
+		public async Task<ActionResult> postAd(string iName, string iCategory, string iAvailable, string iLoc, string iDescription, string iContact, string iPrice, string iCondition, string iNegotiable)
+		{
+			AdvertRepository ad = new AdvertRepository();
+			AuthResponseModel response = new AuthResponseModel();
+
+			int negotiable = 0;
+
+			if (iNegotiable.Equals("Negotiable"))
+			{
+				negotiable = 1;
+			}
+			else {
+				negotiable = 0;
+			}
+
+			response = await ad.AddAdvert(iName, iCategory, iAvailable, iLoc, iDescription, iContact, iPrice,iCondition, negotiable);
+
+			if (response.Response.Equals(200))
+			{
+				return RedirectToAction("AdsPage");
+			}
+			else
+			{
+				var rsp = new AuthResponseModel { Response = response.Response, Status = response.Status, Info = response.Info };
+				return RedirectToAction("Home", "Home");
+			}
+
+		}
+
 
 		[HttpGet]
 		[Route("user/login")]
@@ -128,19 +182,6 @@ namespace WebSite.Controllers
 		}
 
 
-		[Route("AdView/viewAdvert/{id}")]
-		public ViewResult AdView(int id)
-		{
-			AdvertRepository advert = new AdvertRepository();
-			AdvertisementModel model = advert.GetAdvertisement(id);
-			ViewData["Adverts"] = model;
-			return View();
-		}
-
-        public IActionResult PostAd()
-        {
-            return View();
-        }
 
 		public ViewResult AdTest()
 		{

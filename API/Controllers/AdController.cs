@@ -36,5 +36,7 @@ namespace API.Controllers
 			return AdvertisementProcessor.ViewPostById(id);
 		}
 
+
+
 	}
 }
