@@ -72,7 +72,7 @@
 
 <div class="container" id="regForm">
     <h1 class="text-center" style="font-size: 60px"><strong>One Click Away For A Great Ad!</strong></h1>
-    <form action="/ad/postAd/" method="post">
+    <form action="/ad/postAd/" enctype="multipart/form-data" method="post">
         <div class="row">
             <div class="col-sm-6">
                 <div>
@@ -135,7 +135,7 @@
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
-                                Browse… <input type="file" id="imgInp" name="imgInp">
+                                Browse… <input type="file" accept="image/*" id="img" name="img">
                             </span>
                         </span>
                         <input type="text" class="form-control" readonly>
