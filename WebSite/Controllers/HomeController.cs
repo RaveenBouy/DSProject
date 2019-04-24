@@ -102,6 +102,7 @@ namespace WebSite.Controllers
 			AdvertRepository advert = new AdvertRepository();
 			AdvertisementModel model = advert.GetAdvertisement(id);
 			ViewData["Adverts"] = model;
+			ViewBag.Name = HttpContext.Session.GetString(SessionName);
 			return View();
 		}
 
@@ -109,6 +110,15 @@ namespace WebSite.Controllers
 		[Route("AdsPage/postad/")]
 		public IActionResult PostAd()
 		{
+			String s =HttpContext.Session.GetString(SessionName);
+			if (HttpContext.Session.GetString(SessionName) == null)
+			{
+				return RedirectToAction("Home", "Home");
+			}
+			ViewBag.Name = HttpContext.Session.GetString(SessionName);
+
+			
+
 			return View();
 		}
 
