@@ -106,13 +106,19 @@
             {
                 <div class="col-sm-4">
                     <div class="thumbnail  productCard">
+                        <div class="row" style="padding-top:10px">
+                            <div class="col-sm-6" style="padding-left:30px;color:#909090">
+                                <p><span class="glyphicon glyphicon-eye-open"></span> @ad.ViewCount Views</p>
+                            </div>
+                            <div class="col-sm-6" style="padding-left:30px;color:#909090">
+                                <p>@ad.Created</p>
+                            </div>
+                        </div>
                         <img src="~/images/sampleProduct1.jpg" alt="Product">
                         <div class="row" style="margin-top:10px">
 							<div class="col-sm-7" style="padding-left:30px">
 								<p><strong>@ad.ItemName</strong></p>
-								<p class="price"><strong>@ad.Price</strong></p>
-								<p><strong>@ad.Created</strong></p>
-								<p><strong>@ad.ViewCount</strong></p>
+								<p class="price"><strong>Rs. @ad.Price</strong></p>
 							</div>
                             <div class="col-sm-5 text-center">
                                 <a href="/AdView/viewAdvert/@ad.ItemId" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
