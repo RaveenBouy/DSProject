@@ -46,24 +46,25 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1 style="font-size: 55px">Post Yours Ads</h1>
-                <form action="#">
+                <form action="/AdsPage/viewAdverts/" method="get">
                     <div class="row" style="margin-top: 50px">
                         <div class="form-group col-sm-8">
-                            <input type="text" class="form-control" id="searchQuery" placeholder="Search Item" style="border-radius:24px; padding:22px">
+                            <input name="searchCondition" type="text" class="form-control" id="searchCondition" placeholder="Search Item" style="border-radius:24px; padding:22px">
                         </div>
                         <div class="form-group col-sm-6">
-                            <select class="form-control" id="sel1" style="border-radius:24px">
-                                <option>Gampaha</option>
-                                <option>Galle</option>
-                                <option>Kandy</option>
-                                <option>Colombo</option>
-                                <option>Ekala</option>
-                                <option>Kandana</option>
-                                <option>Kottawa</option>
-                                <option>Ganemulla</option>
-                                <option>Homagama</option>
-                                <option>Maharagama</option>
-                            </select>
+							<select name="location" class="form-control" id="location" style="border-radius:24px">
+								<option>Anywhere</option>
+								<option>Gampaha</option>
+								<option>Galle</option>
+								<option>Kandy</option>
+								<option>Colombo</option>
+								<option>Ekala</option>
+								<option>Kandana</option>
+								<option>Kottawa</option>
+								<option>Ganemulla</option>
+								<option>Homagama</option>
+								<option>Maharagama</option>
+							</select>
                         </div>
                         <div class="col-sm-2">
                             <button type="submit" class="btn btn-default" style="background-color:#F8D210; border-radius:24px; border-color: transparent">Search</button>
@@ -75,11 +76,11 @@
                         </div>
                         <div class="collapse col-sm-10 row" id="filters" style="margin-top: 5px">
                             <div class="radio col-sm-7">
-                                <label class="radio-inline"><input type="radio" name="optradio" checked>Descending</label>
-                                <label class="radio-inline"><input type="radio" name="optradio">Ascending</label>
+                                <label class="radio-inline"><input type="radio" name="sortDirection" id="sortDirection" value="desc" checked>Descending</label>
+                                <label class="radio-inline"><input type="radio" name="sortDirection" id="sortDirection" value="asc">Ascending</label>
                             </div>  
                             <div class="checkbox col-sm-4">
-                                <label><input type="checkbox" value="">Most Viewed</label>
+                                <label><input type="checkbox" id="sortCondition" value="viewcount" name="viewcount">Most Viewed</label>
                             </div>
                         </div>
                     </div>
@@ -107,10 +108,12 @@
                     <div class="thumbnail  productCard">
                         <img src="~/images/sampleProduct1.jpg" alt="Product">
                         <div class="row" style="margin-top:10px">
-                            <div class="col-sm-7" style="padding-left:30px">
-                                <p><strong>@ad.ItemName</strong></p>
-                                <p class="price"><strong>@ad.Price</strong></p>
-                            </div>
+							<div class="col-sm-7" style="padding-left:30px">
+								<p><strong>@ad.ItemName</strong></p>
+								<p class="price"><strong>@ad.Price</strong></p>
+								<p><strong>@ad.Created</strong></p>
+								<p><strong>@ad.ViewCount</strong></p>
+							</div>
                             <div class="col-sm-5 text-center">
                                 <a href="/AdView/viewAdvert/@ad.ItemId" class="btn btn-default btn-lg viewMoreBtn" role="button">View More</a>
                             </div>

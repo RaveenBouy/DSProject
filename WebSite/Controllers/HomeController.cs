@@ -67,8 +67,25 @@ namespace WebSite.Controllers
 		[Route("AdsPage/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}")]
 		[Route("AdsPage/viewAdverts/{searchCondition}/{sortCondition}/{sortDirection}/{location}")]
 		public ViewResult AdsPage(string searchCondition = "&none&", string sortCondition = "created", string sortDirection = "desc", string location = "none")
-        {
+		{
 			AdvertRepository advert = new AdvertRepository();
+			if (searchCondition == null) {
+				searchCondition = "&none&";
+			}
+			if (sortCondition == null) {
+				sortCondition = "created";
+			}
+			if (sortDirection == null) {
+				sortDirection = "desc";
+			}
+			if (location == null) {
+				location = "none";
+			}
+			if (location.Equals("Anywhere"))
+			{
+				location = "none";
+			}
+
 			List<AdvertisementModel> model = advert.GetAllAdvertisements(searchCondition, sortCondition, sortDirection, location);
 			ViewData["Adverts"] = model;
 
@@ -115,6 +132,8 @@ namespace WebSite.Controllers
 			}
 
 		}
+
+
 
 
 		[HttpPost]
