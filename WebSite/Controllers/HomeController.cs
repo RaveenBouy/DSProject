@@ -9,14 +9,14 @@ using WebSite.Models;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection;
 
 namespace WebSite.Controllers
 {
 	public class HomeController : Controller
 	{
-
 		const string SessionName = "_Username";
-
 
 		public IActionResult Index()
 		{
@@ -59,8 +59,6 @@ namespace WebSite.Controllers
 			return View();
 		}
 
-
-
 		[HttpGet]
 		[Route("AdsPage/viewAdverts/")]
 		[Route("AdsPage/viewAdverts/{searchCondition}")]
@@ -100,7 +98,6 @@ namespace WebSite.Controllers
 			return View();
 		}
 
-
 		[Route("AdView/viewAdvert/{id}")]
 		public ViewResult AdView(int id)
 		{
@@ -111,7 +108,6 @@ namespace WebSite.Controllers
 			return View();
 		}
 
-
 		[Route("AdsPage/postad/")]
 		public IActionResult PostAd()
 		{
@@ -120,13 +116,11 @@ namespace WebSite.Controllers
 			{
 				return RedirectToAction("Home", "Home");
 			}
+
 			ViewBag.Name = HttpContext.Session.GetString(SessionName);
-
-
 
 			return View();
 		}
-
 
 		[HttpPost]
 		[Route("user/register")]
@@ -148,37 +142,39 @@ namespace WebSite.Controllers
 
 		}
 
-
-
-
-		[HttpPost]
-		[Route("ad/postAd/")]
+		[HttpPost("ad/postAd/")]
 		public async Task<ActionResult> postAd(string iName, string iCategory, string iAvailable, string iLoc, IFormFile img, string iDescription, string iContact, string iPrice, string iCondition, string iNegotiable)
 		{
 			AdvertRepository ad = new AdvertRepository();
 			AuthResponseModel response = new AuthResponseModel();
-
 			int negotiable = 0;
-
-
 			var filePath = Path.GetTempFileName();
+            string iimg = null;
 
+            try
+            {
+                if (img.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await img.CopyToAsync(stream);
+                    }
 
-			if (img.Length > 0)
-			{
-				using (var stream = new FileStream(filePath, FileMode.Create))
-				{
-					await img.CopyToAsync(stream);
-					
-					
-				}
-			}
+                    var bytes = System.IO.File.ReadAllBytes(filePath);
+                    iimg = Convert.ToBase64String(bytes);
+                }
+            }
+            catch (Exception)
+            {
+                Stream imgStream =  Assembly.GetExecutingAssembly()
+                                   .GetManifestResourceStream(
+                                   "DSProject.Resources.notfound.png");
 
-			long size = img.Length;
-
-
-
-			
+                var path1 = @"D:\MS_VS_Projects\DSProject\DSProject\WebSite\Resources\notfound.png";
+                var path2 = @"..\WebSite\Resources\notfound.png";
+                var bytes = System.IO.File.ReadAllBytes(path2);
+                iimg = Convert.ToBase64String(bytes);
+            }
 
 			if (iNegotiable.Equals("Negotiable"))
 			{
@@ -189,7 +185,7 @@ namespace WebSite.Controllers
 				negotiable = 0;
 			}
 
-			response = await ad.AddAdvert(iName, iCategory, iAvailable, iLoc, iDescription, iContact, iPrice, iCondition, negotiable);
+			response = await ad.AddAdvert(iName, iCategory, iAvailable, iLoc, iimg, iDescription, iContact, iPrice, iCondition, negotiable);
 
 			if (response.Response.Equals(200))
 			{
@@ -200,9 +196,7 @@ namespace WebSite.Controllers
 				var rsp = new AuthResponseModel { Response = response.Response, Status = response.Status, Info = response.Info };
 				return RedirectToAction("Home", "Home");
 			}
-
 		}
-
 
 		[HttpGet]
 		[Route("user/login")]
@@ -210,7 +204,6 @@ namespace WebSite.Controllers
 		{
 			UserRepository user = new UserRepository();
 			AuthResponseModel response = user.UserLogin(username, password);
-
 
 			if (response.Response.Equals(200))
 			{
@@ -224,9 +217,7 @@ namespace WebSite.Controllers
 				var rsp = new AuthResponseModel { Response = response.Response, Status = response.Status, Info = response.Info };
 				return RedirectToAction("Home", "Home", rsp);
 			}
-
 		}
-
 
 		[HttpGet]
 		[Route("user/logout")]
@@ -235,8 +226,6 @@ namespace WebSite.Controllers
 			HttpContext.Session.Remove(SessionName);
 			return RedirectToAction("Home", "Home");
 		}
-
-
 
 		public ViewResult AdTest()
 		{

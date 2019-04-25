@@ -15,7 +15,7 @@ namespace WebSite.Models
         public string ItemCategory { get; set; }
         public string Tele { get; set; }
         public string Price { get; set; }
-        //public blob Image { get; set; }
+        public string Image { get; set; }
         public string Con{ get; set; }
 		public string Negotiable { get; set; }
 		public string Created { get; set; }
